@@ -1,0 +1,26 @@
+---
+import ContentLayout from "../layouts/Content.astro";
+import AboutMDX, { frontmatter } from "../data/About.mdx";
+const BusinessName = "PixelPeak Studio";
+const IndustryNiche = "web development and digital design consultancy";
+const CityState = "Austin, Texas";
+const CustomerAudience =
+    "small businesses, startups, and creative professionals";
+const ServiceProduct = "custom websites and brand-focused digital experiences";
+const BenefitOutcome =
+    "exceptional online results and lasting client partnerships";
+const CoreService1 = "Custom Website Design";
+const CoreService2 = "UI/UX Strategy";
+const CoreService3 = "Performance Optimization";
+const YearsInBusiness = "8";
+const RegionOrIndustry = "technology, e-commerce, and creative sectors";
+const CityNeighborhood = "Downtown Austin";
+const PrimaryService = "web design and development";
+const industry = "web design";
+const service = "website creation";
+const audience = "local businesses and entrepreneurs";
+---
+
+<ContentLayout title={frontmatter.title}>
+    <AboutMDX BusinessName={BusinessName} />
+</ContentLayout>
