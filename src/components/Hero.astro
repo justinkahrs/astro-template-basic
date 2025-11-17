@@ -8,7 +8,9 @@ const { title, content } = HeroData;
 <div class="hero relative min-h-screen">
   <img
     src={heroImage.src}
-    alt=""
+    width={heroImage.width}
+    height={heroImage.height}
+    alt="a blurry city skyline"
     class="absolute inset-0 h-full w-full object-cover blur-xs"
     fetchpriority="high"
   />
