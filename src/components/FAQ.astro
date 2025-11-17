@@ -10,12 +10,12 @@ const { title, items: faqs = [] } = FaqData;
   <div class="space-y-3">
     {
       faqs.map((item) => (
-        <div class="collapse-arrow border-base-300 collapse border">
-          <input type="checkbox" />
-          <div class="collapse-title text-xl font-medium">{item.q}</div>
-          <div class="collapse-content">
-            <p>{item.a}</p>
-          </div>
+        <div
+          tabindex="0"
+          class="collapse-arrow bg-base-100 border-base-300 collapse border"
+        >
+          <div class="collapse-title font-semibold">{item.q}</div>
+          <div class="collapse-content text-sm">{item.a}</div>
         </div>
       ))
     }
