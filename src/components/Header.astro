@@ -32,28 +32,28 @@ const { navItems = [], cta, sticky } = HeaderData;
         class="menu menu-md dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow"
       >
         {
-          navItems.map((item) =>
-            item.children ? (
+          navItems.map(({ children, href, name }) =>
+            children ? (
               <li>
-                <a>{item.name}</a>
+                {name}
                 <ul class="p-2">
-                  {item.children.map((child) => (
+                  {children.map(({ href, name }) => (
                     <li>
-                      <a href={child.href}>{child.name}</a>
+                      <a href={href}>{name}</a>
                     </li>
                   ))}
                 </ul>
               </li>
             ) : (
               <li>
-                <a href={item.href}>{item.name}</a>
+                <a href={href}>{name}</a>
               </li>
             )
           )
         }
       </ul>
     </div>
-    <a class="btn btn-ghost text-xl">{companyName}</a>
+    <div class="text-xl lg:mx-4">{companyName}</div>
   </div>
 
   <div class="navbar-center hidden lg:flex">
