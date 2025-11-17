@@ -1,4 +1,5 @@
 ---
+import heroImage from "../assets/heroBG.jpg";
 import { frontmatter as metadata } from "../data/metadata.mdx";
 const HeroData = metadata.hero ?? {};
 const { title, content } = HeroData;
@@ -6,7 +7,7 @@ const { title, content } = HeroData;
 
 <div
   class="hero relative min-h-screen bg-cover bg-center bg-no-repeat"
-  style="background-image: url('/heroBG.jpg');"
+  style={`background-image: url('${heroImage}')`}
 >
   <div class="hero-overlay bg-black/60"></div>
   <div class="hero-content relative z-10 text-center">
