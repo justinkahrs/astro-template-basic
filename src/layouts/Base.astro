@@ -3,34 +3,50 @@ import "../styles/global.css";
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
 import CommonHead from "../components/CommonHead.astro";
+import { fade } from "astro:transitions";
+
 const { title = "Site" } = Astro.props;
 ---
 
-<html lang="en">
+<html lang="en" data-theme="light">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{title}</title>
+
+    <CommonHead />
+
     <script is:inline>
-      if (localStorage.getItem("theme") === null) {
-        document.documentElement.setAttribute("data-theme", "light");
-      } else
-        document.documentElement.setAttribute(
-          "data-theme",
-          localStorage.getItem("theme")
-        );
+      function applyStoredTheme() {
+        const storedTheme = localStorage.getItem("theme");
+        if (storedTheme) {
+          document.documentElement.setAttribute("data-theme", storedTheme);
+        } else {
+          document.documentElement.setAttribute("data-theme", "light");
+        }
+      }
+
+      document.addEventListener("astro:page-load", applyStoredTheme);
+      applyStoredTheme();
     </script>
   </head>
+
   <body class="bg-base-100 text-base-content flex min-h-screen flex-col">
-    <CommonHead />
     <Header />
-    <main class="flex-1">
+    <main class="flex-1" transition:animate={fade({ duration: 250 })}>
       <slot />
     </main>
     <Footer />
+
+    <script type="module">
+      import { themeChange } from "theme-change";
+
+      function initThemeChange() {
+        themeChange(false);
+      }
+
+      document.addEventListener("astro:page-load", initThemeChange);
+      initThemeChange();
+    </script>
   </body>
 </html>
-<script type="module">
-  import { themeChange } from "theme-change";
-  themeChange();
-</script>
