@@ -1,23 +1,23 @@
 ---
-import { frontmatter as ServicesData } from "../data/Services.mdx";
-const { title, services } = ServicesData;
+import { frontmatter as metadata } from "../data/metadata.mdx";
+
+const servicesSection = metadata.servicesSection ?? {};
+const { title, items: services = [] } = servicesSection;
 ---
 
 <section class="mx-auto grid max-w-6xl p-6 md:grid-cols-3">
-    <h2 class="mb-6 text-center text-3xl font-bold md:col-span-3">{title}</h2>
-    {
-        services.map((s) => (
-            <div class="card card-border bg-base-100 m-4 border-gray-300">
-                <div class="card-body">
-                    <h2 class="card-title">{s.title}</h2>
-                    <p>{s.description}</p>
-                    <div class="card-actions justify-end">
-                        {s.cta && (
-                            <button class="btn btn-primary">{s.cta}</button>
-                        )}
-                    </div>
-                </div>
-            </div>
-        ))
-    }
+  <h2 class="mb-6 text-center text-3xl font-bold md:col-span-3">{title}</h2>
+  {
+    services.map((s) => (
+      <div class="card card-border bg-base-100 m-4 border-gray-300">
+        <div class="card-body">
+          <h2 class="card-title">{s.title}</h2>
+          <p>{s.description}</p>
+          <div class="card-actions justify-end">
+            {s.cta && <button class="btn btn-primary">{s.cta}</button>}
+          </div>
+        </div>
+      </div>
+    ))
+  }
 </section>

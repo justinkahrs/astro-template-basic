@@ -1,23 +1,23 @@
 ---
-import { frontmatter as FaqData } from "../data/FAQs.mdx";
-const { title, faqs } = FaqData;
+import { frontmatter as metadata } from "../data/metadata.mdx";
+
+const FaqData = metadata.faq ?? {};
+const { title, items: faqs = [] } = FaqData;
 ---
 
 <section class="bg-base-100 mx-auto max-w-3xl p-10">
-    <h2 class="mb-6 text-center text-3xl font-bold">{title}</h2>
-    <div class="space-y-3">
-        {
-            faqs.map((item) => (
-                <div class="collapse-arrow border-base-300 collapse border">
-                    <input type="checkbox" />
-                    <div class="collapse-title text-xl font-medium">
-                        {item.q}
-                    </div>
-                    <div class="collapse-content">
-                        <p>{item.a}</p>
-                    </div>
-                </div>
-            ))
-        }
-    </div>
+  <h2 class="mb-6 text-center text-3xl font-bold">{title}</h2>
+  <div class="space-y-3">
+    {
+      faqs.map((item) => (
+        <div class="collapse-arrow border-base-300 collapse border">
+          <input type="checkbox" />
+          <div class="collapse-title text-xl font-medium">{item.q}</div>
+          <div class="collapse-content">
+            <p>{item.a}</p>
+          </div>
+        </div>
+      ))
+    }
+  </div>
 </section>

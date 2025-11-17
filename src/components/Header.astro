@@ -1,170 +1,248 @@
 ---
-import { frontmatter as HeaderData } from "../data/Header.mdx";
+import { frontmatter as metadata } from "../data/metadata.mdx";
 import clsx from "clsx";
-const { companyName, navItems = [], cta, sticky } = HeaderData;
+
+const HeaderData = metadata.header ?? {};
+const companyName = metadata.name;
+const { navItems = [], cta, sticky } = HeaderData;
 ---
 
 <div
-    class={clsx("navbar bg-base-100 shadow-sm", sticky && "sticky top-0 z-50")}
+  class={clsx("navbar bg-base-100 shadow-sm", sticky && "sticky top-0 z-50")}
 >
-    <div class="navbar-start">
-        <div class="dropdown">
-            <div tabindex="0" role="button" class="btn btn-ghost lg:hidden">
-                <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    class="h-5 w-5"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                >
-                    <path
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        stroke-width="2"
-                        d="M4 6h16M4 12h8m-8 6h16"></path>
-                </svg>
-            </div>
-            <ul
-                tabindex="-1"
-                class="menu menu-md dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow"
-            >
-                {
-                    navItems.map((item) =>
-                        item.children ? (
-                            <li>
-                                <a>{item.name}</a>
-                                <ul class="p-2">
-                                    {item.children.map((child) => (
-                                        <li>
-                                            <a href={child.href}>
-                                                {child.name}
-                                            </a>
-                                        </li>
-                                    ))}
-                                </ul>
-                            </li>
-                        ) : (
-                            <li>
-                                <a href={item.href}>{item.name}</a>
-                            </li>
-                        ),
-                    )
-                }
-            </ul>
-        </div>
-        <a class="btn btn-ghost text-xl">{companyName}</a>
-    </div>
-
-    <div class="navbar-center hidden lg:flex">
-        <ul class="menu menu-horizontal px-1">
-            {
-                navItems.map((item) =>
-                    item.children ? (
-                        <li>
-                            <details>
-                                <summary>{item.name}</summary>
-                                <ul class="p-2">
-                                    {item.children.map((child) => (
-                                        <li>
-                                            <a href={child.href}>
-                                                {child.name}
-                                            </a>
-                                        </li>
-                                    ))}
-                                </ul>
-                            </details>
-                        </li>
-                    ) : (
-                        <li>
-                            <a href={item.href}>{item.name}</a>
-                        </li>
-                    ),
-                )
-            }
-        </ul>
-    </div>
-
-    <div class="navbar-end">
-        <div class="form-control px-2 pb-2">
-            <label for="theme-select" class="label p-0">
-                <span class="label-text text-xs">Choose Theme</span>
-            </label>
-            <select
-                id="theme-select"
-                class="select select-bordered select-xs"
-                data-choose-theme
-            >
-                <option value="light">light</option>
-                <option value="dark">dark</option>
-                <option value="cupcake">cupcake</option>
-                <option value="bumblebee">bumblebee</option>
-                <option value="emerald">emerald</option>
-                <option value="corporate">corporate</option>
-                <option value="synthwave">synthwave</option>
-                <option value="retro">retro</option>
-                <option value="cyberpunk">cyberpunk</option>
-                <option value="valentine">valentine</option>
-                <option value="halloween">halloween</option>
-                <option value="garden">garden</option>
-                <option value="forest">forest</option>
-                <option value="aqua">aqua</option>
-                <option value="lofi">lofi</option>
-                <option value="pastel">pastel</option>
-                <option value="fantasy">fantasy</option>
-                <option value="wireframe">wireframe</option>
-                <option value="black">black</option>
-                <option value="luxury">luxury</option>
-                <option value="dracula">dracula</option>
-                <option value="cmyk">cmyk</option>
-                <option value="autumn">autumn</option>
-                <option value="business">business</option>
-                <option value="acid">acid</option>
-                <option value="lemonade">lemonade</option>
-                <option value="night">night</option>
-                <option value="coffee">coffee</option>
-                <option value="winter">winter</option>
-                <option value="dim">dim</option>
-                <option value="nord">nord</option>
-                <option value="sunset">sunset</option>
-                <option value="caramellatte">caramellatte</option>
-                <option value="abyss">abyss</option>
-                <option value="silk">silk</option>
-            </select>
-        </div>
-
+  <div class="navbar-start">
+    <div class="dropdown">
+      <div tabindex="0" role="button" class="btn btn-ghost lg:hidden">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          class="h-5 w-5"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M4 6h16M4 12h8m-8 6h16"></path>
+        </svg>
+      </div>
+      <ul
+        tabindex="-1"
+        class="menu menu-md dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow"
+      >
         {
-            cta && (
-                <a class="btn btn-sm" href={cta.href}>
-                    {cta.label}
-                </a>
+          navItems.map((item) =>
+            item.children ? (
+              <li>
+                <a>{item.name}</a>
+                <ul class="p-2">
+                  {item.children.map((child) => (
+                    <li>
+                      <a href={child.href}>{child.name}</a>
+                    </li>
+                  ))}
+                </ul>
+              </li>
+            ) : (
+              <li>
+                <a href={item.href}>{item.name}</a>
+              </li>
             )
+          )
         }
+      </ul>
     </div>
-</div>
+    <a class="btn btn-ghost text-xl">{companyName}</a>
+  </div>
 
-<script>
+  <div class="navbar-center hidden lg:flex">
+    <ul class="menu menu-horizontal px-1">
+      {
+        navItems.map((item) =>
+          item.children ? (
+            <li>
+              <details>
+                <summary>{item.name}</summary>
+                <ul class="p-2">
+                  {item.children.map((child) => (
+                    <li>
+                      <a href={child.href}>{child.name}</a>
+                    </li>
+                  ))}
+                </ul>
+              </details>
+            </li>
+          ) : (
+            <li>
+              <a href={item.href}>{item.name}</a>
+            </li>
+          )
+        )
+      }
+    </ul>
+  </div>
+
+  <div class="navbar-end">
+    <div class="form-control px-2 pb-2">
+      <label for="theme-select" class="label p-0">
+        <span class="label-text text-xs">Choose Theme</span>
+      </label>
+      <select
+        id="theme-select"
+        class="select select-bordered select-xs"
+        data-choose-theme
+      >
+        <option value="light">light</option>
+        <option value="dark">dark</option>
+        <option value="cupcake">cupcake</option>
+        <option value="bumblebee">bumblebee</option>
+        <option value="emerald">emerald</option>
+        <option value="corporate">corporate</option>
+        <option value="synthwave">synthwave</option>
+        <option value="retro">retro</option>
+        <option value="cyberpunk">cyberpunk</option>
+        <option value="valentine">valentine</option>
+        <option value="halloween">halloween</option>
+        <option value="garden">garden</option>
+        <option value="forest">forest</option>
+        <option value="aqua">aqua</option>
+        <option value="lofi">lofi</option>
+        <option value="pastel">pastel</option>
+        <option value="fantasy">fantasy</option>
+        <option value="wireframe">wireframe</option>
+        <option value="black">black</option>
+        <option value="luxury">luxury</option>
+        <option value="dracula">dracula</option>
+        <option value="cmyk">cmyk</option>
+        <option value="autumn">autumn</option>
+        <option value="business">business</option>
+        <option value="acid">acid</option>
+        <option value="lemonade">lemonade</option>
+        <option value="night">night</option>
+        <option value="coffee">coffee</option>
+        <option value="winter">winter</option>
+        <option value="dim">dim</option>
+        <option value="nord">nord</option>
+        <option value="sunset">sunset</option>
+        <option value="caramellatte">caramellatte</option>
+        <option value="abyss">abyss</option>
+        <option value="silk">silk</option>
+      </select>
+    </div>
+
+    <div class="form-control px-2 pb-2">
+      <label for="font-select" class="label p-0">
+        <span class="label-text text-xs">Choose Font</span>
+      </label>
+      <select
+        id="font-select"
+        class="select select-bordered select-xs"
+        data-choose-font
+      >
+        <option value="system">System Sans</option>
+        <option value="inter">Inter</option>
+        <option value="poppins">Poppins</option>
+        <option value="lora">Lora</option>
+        <option value="playfair">Playfair Display</option>
+        <option value="jetbrains">JetBrains Mono</option>
+      </select>
+    </div>
+
+    {
+      cta && (
+        <a class="btn btn-sm" href={cta.href}>
+          {cta.label}
+        </a>
+      )
+    }
+  </div>
+
+  <script>
     document.addEventListener("DOMContentLoaded", () => {
-        const key = "theme";
-        const html = document.querySelector("html");
-        const select = document.querySelector("select[data-choose-theme]");
-        const saved = localStorage.getItem(key);
-        if (saved) {
-            html.setAttribute("data-theme", saved);
-            if (select) select.value = saved;
-        }
-        if (select) {
-            select.addEventListener("change", (e) => {
-                const theme = e.target.value;
-                if (theme) {
-                    document
-                        .querySelector("html")
-                        .setAttribute("data-theme", theme);
-                    localStorage.setItem(key, theme);
-                } else {
-                    html.removeAttribute("data-theme");
-                    localStorage.removeItem(key);
-                }
-            });
-        }
+      const html = document.querySelector("html");
+
+      const themeKey = "theme";
+      const themeSelect = document.querySelector("select[data-choose-theme]");
+      const savedTheme = localStorage.getItem(themeKey);
+      if (savedTheme) {
+        html.setAttribute("data-theme", savedTheme);
+        if (themeSelect) themeSelect.value = savedTheme;
+      }
+      if (themeSelect) {
+        themeSelect.addEventListener("change", (e) => {
+          const theme = e.target.value;
+          if (theme) {
+            html.setAttribute("data-theme", theme);
+            localStorage.setItem(themeKey, theme);
+          } else {
+            html.removeAttribute("data-theme");
+            localStorage.removeItem(themeKey);
+          }
+        });
+      }
+
+      const fonts = {
+        system: {
+          css: "ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, Noto Sans, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji, sans-serif",
+        },
+        inter: {
+          css: "'Inter', ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif",
+          href: "https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap",
+          id: "font-inter",
+        },
+        poppins: {
+          css: "'Poppins', ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif",
+          href: "https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap",
+          id: "font-poppins",
+        },
+        lora: {
+          css: "'Lora', Georgia, Cambria, Times New Roman, Times, serif",
+          href: "https://fonts.googleapis.com/css2?family=Lora:wght@400;600;700&display=swap",
+          id: "font-lora",
+        },
+        playfair: {
+          css: "'Playfair Display', Georgia, Cambria, Times New Roman, Times, serif",
+          href: "https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&display=swap",
+          id: "font-playfair",
+        },
+        jetbrains: {
+          css: "'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, Liberation Mono, Courier New, monospace",
+          href: "https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&display=swap",
+          id: "font-jetbrains",
+        },
+      };
+
+      function ensureFontLoaded(key) {
+        const meta = fonts[key];
+        if (!meta || !meta.href || !meta.id) return;
+        if (document.getElementById(meta.id)) return;
+        const link = document.createElement("link");
+        link.rel = "stylesheet";
+        link.href = meta.href;
+        link.id = meta.id;
+        document.head.appendChild(link);
+      }
+
+      function applyFont(key) {
+        const meta = fonts[key] || fonts.system;
+        if (meta.href) ensureFontLoaded(key);
+        document.documentElement.style.setProperty("--font-body", meta.css);
+      }
+
+      const fontKey = "font";
+      const fontSelect = document.querySelector("select[data-choose-font]");
+      const savedFont = localStorage.getItem(fontKey) || "system";
+      applyFont(savedFont);
+      if (fontSelect) fontSelect.value = savedFont;
+
+      if (fontSelect) {
+        fontSelect.addEventListener("change", (e) => {
+          const font = e.target.value;
+          localStorage.setItem(fontKey, font);
+          applyFont(font);
+        });
+      }
     });
-</script>
+  </script>
+</div>

@@ -2,6 +2,7 @@
 import "../styles/global.css";
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
+import CommonHead from "../components/CommonHead.astro";
 const { title = "Site" } = Astro.props;
 ---
 
@@ -16,11 +17,12 @@ const { title = "Site" } = Astro.props;
       } else
         document.documentElement.setAttribute(
           "data-theme",
-          localStorage.getItem("theme"),
+          localStorage.getItem("theme")
         );
     </script>
   </head>
   <body class="bg-base-100 text-base-content flex min-h-screen flex-col">
+    <CommonHead />
     <Header />
     <main class="flex-1">
       <slot />

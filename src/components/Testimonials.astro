@@ -1,29 +1,31 @@
 ---
-import { frontmatter as TestimonialsData } from "../data/Testimonials.mdx";
-const { title, testimonials } = TestimonialsData;
+import { frontmatter as metadata } from "../data/metadata.mdx";
+
+const TestimonialsData = metadata.testimonialsSection ?? {};
+const { title, items: testimonials = [] } = TestimonialsData;
 ---
 
 <section class="bg-base-200 p-10">
-    <h2 class="mb-6 text-center text-3xl font-bold">{title}</h2>
-    <div
-        id="testimonials-carousel"
-        class="carousel w-full snap-x snap-mandatory space-x-4 overflow-x-auto scroll-smooth p-4"
-        aria-live="polite"
-    >
-        {
-            testimonials.map((t) => (
-                <div class="carousel-item w-[80%] sm:w-[60%] md:w-[40%] snap-start">
-                    <div class="card bg-base-100 w-full shadow-xl">
-                        <div class="card-body items-center text-center">
-                            <p>“{t.content}”</p>
-                            <h3 class="mt-2 font-semibold">
-                                – {t.author}
-                                {t.title && `, ${t.title}`}
-                            </h3>
-                        </div>
-                    </div>
-                </div>
-            ))
-        }
-    </div>
+  <h2 class="mb-6 text-center text-3xl font-bold">{title}</h2>
+  <div
+    id="testimonials-carousel"
+    class="carousel w-full snap-x snap-mandatory space-x-4 overflow-x-auto scroll-smooth p-4"
+    aria-live="polite"
+  >
+    {
+      testimonials.map((t) => (
+        <div class="carousel-item w-[80%] snap-start sm:w-[60%] md:w-[40%]">
+          <div class="card bg-base-100 w-full shadow-xl">
+            <div class="card-body items-center text-center">
+              <p>“{t.content}”</p>
+              <h3 class="mt-2 font-semibold">
+                – {t.author}
+                {t.title && `, ${t.title}`}
+              </h3>
+            </div>
+          </div>
+        </div>
+      ))
+    }
+  </div>
 </section>

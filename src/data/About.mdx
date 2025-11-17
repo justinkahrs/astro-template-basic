@@ -1,49 +1,40 @@
 ---
-title: 'About'
+title: "About"
 ---
 
-export const BusinessName = 'PixelPeak Studio';
-export const City = "San Francisco"
-export const IndustryNiche = 'web development and digital design consultancy';
-export const CityState = 'Austin, Texas';
-export const CustomerAudience = 'small businesses, startups, and creative professionals';
-export const ServiceProduct = 'custom websites and brand-focused digital experiences';
-export const BenefitOutcome = 'exceptional online results and lasting client partnerships';
-export const CoreService1 = 'Custom Website Design';
-export const CoreService2 = 'UI/UX Strategy';
-export const CoreService3 = 'Performance Optimization';
-export const YearsInBusiness = '8';
-export const RegionOrIndustry = 'technology, e-commerce, and creative sectors';
-export const CityNeighborhood = 'Downtown Austin';
-export const PrimaryService = 'web design and development';
-export const industry = 'web design';
-export const service = 'website creation';
-export const audience = 'local businesses and entrepreneurs';
+import { frontmatter as metadata } from "./metadata.mdx";
 
 # About This Example Page
-This page is a **template** to show how your company’s “About” section could look on a finished site.
-In your live site, we’ll replace this content with your brand voice, story, and SEO-focused copy so you can rank for the searches that matter to your business.
+This page is a **template** to show how your company’s About section could look on a finished site.
+In your live site, we will replace this content with your brand voice, story, and SEO focused copy so you can rank for the searches that matter to your business.
 
-## {BusinessName} — Who We Are
-{BusinessName} is a {IndustryNiche} based in {CityState}. We help {CustomerAudience} with {ServiceProduct}—delivering reliable results, friendly service, and clear communication from day one.
+## {metadata.name}: Who We Are
+{metadata.name} is a {metadata.industryNiche} based in {metadata.location.city}. We help {metadata.primaryAudience} with {metadata.primaryService}. We deliver reliable results, friendly service, and clear communication from day one.
 
-Our mission is simple: provide {BenefitOutcome} with a focus on quality, transparency, and long-term partnerships.
+Our mission is simple: provide exceptional online results and lasting client partnerships with a focus on quality, transparency, and long term relationships.
 
 ### What We Do
-- {CoreService1} — brief benefit-driven description.
-- {CoreService2} — brief benefit-driven description.
-- {CoreService3} — brief benefit-driven description.
+
+<ul>
+  {metadata.services.map((service) => (
+    <li key={service.id}>
+      <strong>{service.name}</strong> {service.shortDescription}
+    </li>
+  ))}
+</ul>
 
 ### Why Choose Us
-- ✅ **Experience & Expertise:** {YearsInBusiness} years serving clients across {RegionOrIndustry}.
-- ⚡ **Fast & Reliable:** On-time delivery with proactive updates throughout the project.
-- 🤝 **People-First:** We listen, plan, and build around your goals and budget.
 
-## SEO-Optimized Summary (Example)
-> This section demonstrates how we’ll weave in SEO keywords naturally.
+- ✅ **Experience & Expertise:** {metadata.yearsInBusiness} years serving clients across {metadata.regionsServed}.
+- ⚡ **Fast & Reliable:** On time delivery with proactive updates throughout the project.
+- 🤝 **People First:** We listen, plan, and build around your goals and budget.
+
+## SEO Optimized Summary (Example)
+> This section demonstrates how we will weave in SEO keywords naturally.
 > Replace with your specific terms during onboarding.
 
-### Example Local & Service Keywords
-{CityNeighborhood} {PrimaryService}  
-{industry} specialists in {CityState}  
-{service} for {audience} near {City}
+### Example Local and Service Keywords
+
+{metadata.location.neighborhood} {metadata.primaryService}  
+{metadata.industryNiche} specialists in {metadata.location.cityState}  
+{metadata.serviceCategory} for {metadata.primaryAudience} near {metadata.location.city}
