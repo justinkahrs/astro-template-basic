@@ -4,15 +4,60 @@ import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
 import CommonHead from "../components/CommonHead.astro";
 import { fade } from "astro:transitions";
+import { frontmatter as meta } from "../data/metadata.mdx";
 
 const { title = "Site" } = Astro.props;
+
+const seo = meta.seo || {};
+
+const pageTitle =
+  seo.title ||
+  `${meta.name}${meta.primaryService ? ` | ${meta.primaryService}` : ""}` ||
+  title;
+
+const description = seo.description || (meta.hero && meta.hero.content) || "";
+
+const keywords = [
+  seo.cityKeyword,
+  seo.serviceKeyword,
+  meta.serviceCategory,
+  meta.primaryService,
+  meta.primaryAudience,
+  meta.industryNiche,
+  meta.regionsServed,
+]
+  .filter(Boolean)
+  .join(", ");
 ---
 
 <html lang="en" data-theme="light">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>{title}</title>
+    <title>{pageTitle}</title>
+    <meta name="description" content={description} />
+    {keywords && <meta name="keywords" content={keywords} />}
+    <meta name="author" content={meta.name} />
+    {
+      meta.location?.cityState && (
+        <meta name="geo.placename" content={meta.location.cityState} />
+      )
+    }
+    {
+      meta.location?.state && (
+        <meta name="geo.region" content={meta.location.state} />
+      )
+    }
+    <meta name="robots" content="index,follow" />
+    <meta property="og:title" content={pageTitle} />
+    <meta property="og:site_name" content={meta.name} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="en_US" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={pageTitle} />
+    <meta name="twitter:description" content={description} />
+
     <CommonHead />
     <script is:inline>
       (function () {
