@@ -5,17 +5,18 @@ const HeroData = metadata.hero ?? {};
 const { title, content } = HeroData;
 ---
 
-<div
-  class="hero relative min-h-screen bg-cover bg-center bg-no-repeat"
-  style={`background-image: url('${heroImage.src}')`}
->
-  <div class="hero-overlay bg-black/60"></div>
+<div class="hero relative min-h-screen">
+  <img
+    src={heroImage.src}
+    alt=""
+    class="absolute inset-0 h-full w-full object-cover"
+    fetchpriority="high"
+  />
+  <div class="hero-overlay absolute inset-0 bg-black/60"></div>
   <div class="hero-content relative z-10 text-center">
     <div class="max-w-md text-white">
       <h1 class="text-5xl font-bold">{title}</h1>
-      <p class="py-6">
-        {content}
-      </p>
+      <p class="py-6">{content}</p>
       <a role="button" class="btn btn-primary" href="/contact">Contact Us</a>
     </div>
   </div>
