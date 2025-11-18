@@ -16,7 +16,7 @@
     "autoprefixer": "^10.4.22",
     "clsx": "^2.1.1",
     "cssnano": "^7.1.2",
-    "daisyui": "^5.3.7",
+    "daisyui": "^5.5.5",
     "tailwindcss": "^4.1.15",
     "theme-change": "^2.5.0"
   },
