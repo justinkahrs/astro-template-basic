@@ -1,51 +1,61 @@
-<section class="bg-base-200 p-10 text-center">
-    <h2 class="mb-10 text-4xl font-bold">Pricing Plans</h2>
-    <div class="mx-auto grid max-w-6xl gap-6 md:grid-cols-3">
-        <div class="card bg-base-100 shadow-xl" id="starter">
-            <div class="card-body">
-                <h2 class="card-title justify-center">Starter</h2>
-                <p>$499 — Great for portfolios</p>
-                <div class="card-actions justify-center">
-                    <button class="btn" data-target="starter">Select</button>
-                </div>
+---
+import { frontmatter as metadata } from "../data/metadata.mdx";
+
+const pricingSection = metadata.pricingSection ?? {};
+const { title, items: plans = [] } = pricingSection;
+---
+
+<section id="pricing-plans" class="bg-base-200 p-10 text-center">
+  <h2 class="mb-10 text-4xl font-bold">{title}</h2>
+  <div class="mx-auto grid max-w-6xl gap-6 md:grid-cols-3">
+    {
+      plans.map((plan) => (
+        <div
+          class={`card shadow-xl ${
+            plan.highlight ? "bg-primary text-primary-content" : "bg-base-100"
+          }`}
+          id={plan.id}
+        >
+          <div class="card-body">
+            <h2 class="card-title justify-center">
+              {plan.name}
+              {plan.badge && (
+                <div class="badge badge-secondary">{plan.badge}</div>
+              )}
+            </h2>
+            <p>
+              {plan.price} - {plan.tagline}
+            </p>
+            <div class="card-actions justify-center">
+              <button class="btn" data-target={plan.id}>
+                Select
+              </button>
             </div>
+          </div>
         </div>
-        <div class="card bg-primary text-primary-content shadow-xl" id="pro">
-            <div class="card-body">
-                <h2 class="card-title justify-center">
-                    Pro <div class="badge badge-secondary">Popular</div>
-                </h2>
-                <p>$999 — For small businesses</p>
-                <div class="card-actions justify-center">
-                    <button class="btn" data-target="pro">Select</button>
-                </div>
-            </div>
-        </div>
-        <div class="card bg-base-100 shadow-xl" id="enterprise">
-            <div class="card-body">
-                <h2 class="card-title justify-center">Enterprise</h2>
-                <p>Custom pricing — tailored for you</p>
-                <div class="card-actions justify-center">
-                    <button class="btn" data-target="enterprise">Select</button>
-                </div>
-            </div>
-        </div>
-    </div>
+      ))
+    }
+  </div>
 </section>
 
 <script is:inline>
-    const buttons = document.querySelectorAll("button[data-target]");
+  const section = document.getElementById("pricing-plans");
+  if (section) {
+    const buttons = section.querySelectorAll("button[data-target]");
     buttons.forEach((button) => {
-        button.addEventListener("click", () => {
-            document.querySelectorAll(".card").forEach((card) => {
-                card.classList.remove("bg-primary", "text-primary-content");
-                card.classList.add("bg-base-100", "text-base-content");
-            });
-
-            const targetId = button.dataset.target;
-            const selectedCard = document.getElementById(targetId);
-            selectedCard.classList.remove("bg-base-100", "text-base-content");
-            selectedCard.classList.add("bg-primary", "text-primary-content");
+      button.addEventListener("click", () => {
+        section.querySelectorAll(".card").forEach((card) => {
+          card.classList.remove("bg-primary", "text-primary-content");
+          card.classList.add("bg-base-100", "text-base-content");
         });
+
+        const targetId = button.dataset.target;
+        const selectedCard = document.getElementById(targetId);
+        if (selectedCard) {
+          selectedCard.classList.remove("bg-base-100", "text-base-content");
+          selectedCard.classList.add("bg-primary", "text-primary-content");
+        }
+      });
     });
+  }
 </script>

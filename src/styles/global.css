@@ -12,8 +12,8 @@
   utils: false;
   logs: false;
   include:
-    collapse, carousel, card, button, dropdown, navbar, footer, select, link,
-    menu, hover, card, hero, textarea, label, input, form;
+    badge, collapse, carousel, card, button, dropdown, navbar, footer, select,
+    link, menu, hover, card, hero, textarea, label, input, form;
 }
 
 :root {
